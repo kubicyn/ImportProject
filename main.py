@@ -11,3 +11,4 @@
 [Student C] Save statistics to the file
 [Student B] Close the application
 """
+print('dziala?')
