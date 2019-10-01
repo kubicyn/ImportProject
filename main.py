@@ -1,4 +1,4 @@
-#s3.zylowski.net/public/input/6.txt
+# s3.zylowski.net/public/input/6.txt
 
 """
 [Student A] Menu of application
@@ -11,4 +11,11 @@
 [Student C] Save statistics to the file
 [Student B] Close the application
 """
-print('dziala?')
+
+
+def main():
+    menu()
+
+
+def menu():
+    print('**********Import Menu**********')
