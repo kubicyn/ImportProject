@@ -47,6 +47,9 @@ def menu():
         save_report_to_file()
     elif category == "Q" or category == "q":
         quit_program()
+    else:
+        print("Choice not on the list.\n Try again.")
+        menu()
 
 
 def download_file():
