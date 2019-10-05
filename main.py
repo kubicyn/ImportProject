@@ -53,8 +53,13 @@ def menu():
 
 
 def download_file():
-    print()
+    print('Downloading file to the directory...')
     # [Student B] Downloading text file from the internet
+    directo = '/Users/vampi/6.txt'
+    url = '# s3.zylowski.net/public/input/6.txt'
+    wget.download(url, directo)
+    print('File downloaded to the directroy ' + directo)
+    menu()
 
 
 def letter_count():
