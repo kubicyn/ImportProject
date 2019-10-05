@@ -58,8 +58,16 @@ def download_file():
 
 
 def letter_count():
-    print()
+    print('Liczenie liter w pliku...')
     # [Student A] Count letters
+    sum_letter = 0
+    file_to_load = open('6.txt', 'r')
+    read_file = file_to_load.read()
+    for letter in range(len(read_file)):
+        if read_file[letter].isalpha():
+            sum_letter += 1
+
+    print('Liczba liter w pliku to: ', sum_letter)
 
 
 def words_count():
