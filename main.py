@@ -13,6 +13,7 @@
 """
 import wget
 
+
 def main():
     menu()
 
@@ -21,6 +22,7 @@ def menu():
     print('**********Import Menu**********')
     print()
     category = input("Chose one of the options:\n"
+                     "X: File location. \n"
                      "A: Download text file from source.\n"
                      "B: Count letters in file.\n"
                      "C: Count words in file.\n"
@@ -30,8 +32,9 @@ def menu():
                      "G: Save report.\n"
                      "Q: Quit application.\n"
                      "Enter your choice: ")
-
-    if category == "A" or category == "a":
+    if category == 'X' or category == 'x':
+        file_location()
+    elif category == "A" or category == "a":
         download_file()
     elif category == "B" or category == "b":
         letter_count()
@@ -52,10 +55,15 @@ def menu():
         menu()
 
 
+def file_location():
+    file_location.locfile = input('Enter file destination: ')
+    menu()
+
+
 def download_file():
     print('Downloading file to the directory...')
     # [Student B] Downloading text file from the internet
-    directo = '/Users/vampi/6.txt'
+    directo = file_location.locfile
     url = '# s3.zylowski.net/public/input/6.txt'
     wget.download(url, directo)
     print('File downloaded to the directroy ' + directo)
@@ -63,16 +71,16 @@ def download_file():
 
 
 def letter_count():
-    print('Liczenie liter w pliku...')
+    print('Counting letters in file...')
     # [Student A] Count letters
     sum_letter = 0
-    file_to_load = open('6.txt', 'r')
+    file_to_load = open(file_location.locfile, 'r')
     read_file = file_to_load.read()
     for letter in range(len(read_file)):
         if read_file[letter].isalpha():
             sum_letter += 1
 
-    print('Liczba liter w pliku to: ', sum_letter)
+    print('Number of letters in file : ', sum_letter)
 
 
 def words_count():
