@@ -64,7 +64,7 @@ def download_file():
     print('Downloading file to the directory...')
     # [Student B] Downloading text file from the internet
     directo = file_location.locfile
-    url = '# s3.zylowski.net/public/input/6.txt'
+    url = 'https://s3.zylowski.net/public/input/6.txt'
     wget.download(url, directo)
     print('File downloaded to the directroy ' + directo)
     menu()
