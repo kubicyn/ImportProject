@@ -12,6 +12,10 @@
 [Student B] Close the application
 """
 import wget
+import os
+import nltk
+import string
+from nltk.tokenize import sent_tokenize
 
 
 def main():
@@ -89,13 +93,33 @@ def words_count():
 
 
 def pun_marks_count():
-    print()
+    print('Counting marks in file...')
     # [Student C] Count punctuation marks
+    if not os.path.isfile(file_location.locfile):
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    file_to_load = open(file_location.locfile, 'r')
+    read_file = file_to_load.read()
+    my_list = []
+    for c in read_file:
+        if c in string.punctuation:
+            my_list.append(c)
+    number_of_marks = len(my_list)
+    print('Number of marks in file : ', number_of_marks)
+    menu()
 
 
 def sentence_count():
-    print()
+    print('Counting sentences in file...')
     # [Student C] Count sentences
+    if not os.path.isfile(file_location.locfile):
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    file_to_load = open(file_location.locfile, 'r')
+    read_file = file_to_load.read()
+    number_of_sentences = len(sent_tokenize(read_file))
+    print('Number of sentences in file : ', number_of_sentences)
+    menu()
 
 
 def report_generator():
