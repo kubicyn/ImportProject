@@ -110,10 +110,10 @@ def words_count():
 def pun_marks_count():
     print('Counting marks in file...')
     # [Student C] Count punctuation marks
-    if not os.path.isfile(file_location.locfile):
+    if not os.path.isfile(file_location.locfile+'6.txt'):
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'6.txt', 'r')
     read_file = file_to_load.read()
     my_list = []
     for c in read_file:
@@ -127,10 +127,10 @@ def pun_marks_count():
 def sentence_count():
     print('Counting sentences in file...')
     # [Student C] Count sentences
-    if not os.path.isfile(file_location.locfile):
+    if not os.path.isfile(file_location.locfile+'6.txt'):
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'6.txt', 'r')
     read_file = file_to_load.read()
     number_of_sentences = len(sent_tokenize(read_file))
     print('Number of sentences in file : ', number_of_sentences)
@@ -140,11 +140,13 @@ def sentence_count():
 def report_generator():
     print()
     # [Student A] Generate report about count of every letter in the file
+    menu()
 
 
 def save_report_to_file():
     print()
     # [Student C] Save statistics to the file
+    menu()
 
 
 def quit_program():
