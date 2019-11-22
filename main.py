@@ -135,7 +135,11 @@ def save_report_to_file():
 def quit_program():
     print()
     # [Student B] Close the application
-
+    if os.path.exists(file_location.locfile+'6.txt'):
+        os.remove(file_location.locfile+'6.txt')
+        quit()
+    else:
+        quit()
 
 # Program start
 main()
