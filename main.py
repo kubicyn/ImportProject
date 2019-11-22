@@ -76,8 +76,19 @@ def letter_count():
 
 
 def words_count():
-    print()
+    print('Counting words in file...')
     # [Student B] Count words
+    if not os.path.isfile(file_location.locfile+'6.txt'):
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    file_to_load = open(file_location.locfile+'6.txt', 'r')
+    num_words = 0
+    with file_to_load as f:
+        for line in f:
+            words = line.split()
+            num_words += len(words)
+    print('Number of letters in file : ', num_words)
+    menu()
 
 
 def pun_marks_count():
