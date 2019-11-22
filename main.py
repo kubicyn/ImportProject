@@ -77,14 +77,18 @@ def download_file():
 def letter_count():
     print('Counting letters in file...')
     # [Student A] Count letters
+    if not os.path.isfile(file_location.locfile+'6.txt'):
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
     sum_letter = 0
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'6.txt', 'r')
     read_file = file_to_load.read()
     for letter in range(len(read_file)):
         if read_file[letter].isalpha():
             sum_letter += 1
 
     print('Number of letters in file : ', sum_letter)
+    menu()
 
 
 def words_count():
