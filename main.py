@@ -11,11 +11,13 @@
 [Student C] Save statistics to the file
 [Student B] Close the application
 """
+import string
+from nltk import sent_tokenize
 import wget
 import os
 import nltk
-import string
-from nltk.tokenize import sent_tokenize
+nltk.download('punkt')
+global raport
 
 
 def main():
@@ -77,34 +79,58 @@ def download_file():
 def letter_count():
     print('Counting letters in file...')
     # [Student A] Count letters
+   # print(file_location.locfile)
+    if os.path.exists('6.txt') == False:
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
     sum_letter = 0
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'/6.txt', 'r')
     read_file = file_to_load.read()
     for letter in range(len(read_file)):
         if read_file[letter].isalpha():
             sum_letter += 1
-
+    raport = open("raport.txt", "a+")
+    raport.write('Number of letters: '+str(sum_letter)+'\n')
+    raport.close()
     print('Number of letters in file : ', sum_letter)
+    menu()
 
 
 def words_count():
-    print()
+    print('Counting words in file...')
     # [Student B] Count words
+    if os.path.exists('6.txt') == False:
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    file_to_load = open(file_location.locfile+'/6.txt', 'r')
+    num_words = 0
+    with file_to_load as f:
+        for line in f:
+            words = line.split()
+            num_words += len(words)
+    raport = open("raport.txt", "a+")
+    raport.write('Number of words: '+str(num_words)+'\n')
+    raport.close()
+    print('Number of words in file : ', num_words)
+    menu()
 
 
 def pun_marks_count():
     print('Counting marks in file...')
     # [Student C] Count punctuation marks
-    if not os.path.isfile(file_location.locfile):
+    if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'/6.txt', 'r')
     read_file = file_to_load.read()
     my_list = []
     for c in read_file:
         if c in string.punctuation:
             my_list.append(c)
     number_of_marks = len(my_list)
+    raport = open("raport.txt", "a+")
+    raport.write('Number of marks: '+str(number_of_marks)+'\n')
+    raport.close()
     print('Number of marks in file : ', number_of_marks)
     menu()
 
@@ -112,29 +138,58 @@ def pun_marks_count():
 def sentence_count():
     print('Counting sentences in file...')
     # [Student C] Count sentences
-    if not os.path.isfile(file_location.locfile):
+    if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile, 'r')
+    file_to_load = open(file_location.locfile+'/6.txt', 'r')
     read_file = file_to_load.read()
     number_of_sentences = len(sent_tokenize(read_file))
+    raport = open("raport.txt", "a+")
+    raport.write('Number of sentences: '+str(number_of_sentences)+'\n')
+    raport.close()
     print('Number of sentences in file : ', number_of_sentences)
     menu()
 
 
 def report_generator():
-    print()
+    print('Generating report...')
     # [Student A] Generate report about count of every letter in the file
+    if os.path.exists('6.txt') == False:
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    letter_Dictionary = dict()
+    file_to_load = open(file_location.locfile + '/6.txt', 'r')
+    for line_in_file in file_to_load:
+        this_must_be_lower = line_in_file.lower()
+        letters = list(this_must_be_lower)
+        for letter in letters:
+            if letter.isalpha():
+                if letter in letter_Dictionary:
+                    letter_Dictionary[letter] = letter_Dictionary[letter] + 1
+                else:
+                    letter_Dictionary[letter] = 1
+    for dictionary_key in list(letter_Dictionary.keys()):
+        str(print(dictionary_key, ':', letter_Dictionary[dictionary_key]))
+    menu()
 
 
 def save_report_to_file():
-    print()
+    print('Saving report to file...')
     # [Student C] Save statistics to the file
+    raport = open("raport.txt", "r")
+    print(raport.read())
+    menu()
 
 
 def quit_program():
     print()
     # [Student B] Close the application
+    if os.path.exists(file_location.locfile+'/6.txt'):
+        os.remove('6.txt')
+        os.remove("raport.txt")
+        quit()
+    else:
+        quit()
 
 
 # Program start
