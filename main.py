@@ -79,20 +79,30 @@ def download_file():
 def letter_count():
     print('Counting letters in file...')
     # [Student A] Count letters
-   # print(file_location.locfile)
     if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    sum_letter = 0
+
+    vowels = 0
+    consonants = 0
     file_to_load = open(file_location.locfile+'/6.txt', 'r')
     read_file = file_to_load.read()
-    for letter in range(len(read_file)):
-        if read_file[letter].isalpha():
-            sum_letter += 1
+    read_file.lower()
+
+    for i in read_file:
+        if(ord(i) == 65 or ord(i) == 69 or ord(i) == 73
+           or ord(i) == 79 or ord(i) == 85
+           or ord(i) == 97 or ord(i) == 101 or ord(i) == 105
+           or ord(i) == 111 or ord(i) == 117):
+            vowels = vowels + 1
+        elif((ord(i) >= 97 and ord(i) <= 122) or (ord(i) >= 65 and ord(i) <= 90)):
+            consonants = consonants + 1
     raport = open("raport.txt", "a+")
-    raport.write('Number of letters: '+str(sum_letter)+'\n')
+    raport.write('Total Number of Vowels in this String: '+str(vowels)+'\n')
+    raport.write('Total Number of Consonants in this String: '+str(consonants)+'\n')
     raport.close()
-    print('Number of letters in file : ', sum_letter)
+    print("Total Number of Vowels in this String = ", vowels)
+    print("Total Number of Consonants in this String = ", consonants)
     menu()
 
 
