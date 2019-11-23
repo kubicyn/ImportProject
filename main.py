@@ -117,7 +117,8 @@ def words_count():
     with file_to_load as f:
         for line in f:
             words = line.split()
-            num_words += len(words)
+            if len(line) >= 2:    
+                num_words += len(words)
     raport = open("raport.txt", "a+")
     raport.write('Number of words: '+str(num_words)+'\n')
     raport.close()
