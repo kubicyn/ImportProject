@@ -147,7 +147,7 @@ def pun_marks_count():
     read_file = file_to_load.read()
     my_list = []
     for c in read_file:
-        if c == "?" or ".":
+        if c == "?" or c == ".":
             my_list.append(c)
     number_of_marks = len(my_list)
     raport = open("raport.txt", "a+")
