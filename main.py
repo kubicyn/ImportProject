@@ -138,13 +138,29 @@ def sentence_count():
 
 
 def report_generator():
-    print()
+    print('Generating report...')
     # [Student A] Generate report about count of every letter in the file
+    if not os.path.isfile(file_location.locfile+'6.txt'):
+        print('The file has not been downloaded, go back to the menu and select "a"')
+        return menu()
+    letter_Dictionary = dict()
+    file_to_load = open(file_location.locfile + '6.txt', 'r')
+    for line_in_file in file_to_load:
+        this_must_be_lower = line_in_file.lower()
+        letters = list(this_must_be_lower)
+        for letter in letters:
+            if letter.isalpha():
+                if letter in letter_Dictionary:
+                    letter_Dictionary[letter] = letter_Dictionary[letter] + 1
+                else:
+                    letter_Dictionary[letter] = 1
+    for dictionary_key in list(letter_Dictionary.keys()):
+        str(print(dictionary_key, ':', letter_Dictionary[dictionary_key]))
     menu()
 
 
 def save_report_to_file():
-    print()
+    print('Saving report to file...')
     # [Student C] Save statistics to the file
     menu()
 
