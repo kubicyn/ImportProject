@@ -1,4 +1,0 @@
-Number of letters: 2166
-Number of words: 546
-Number of marks: 76
-Number of sentences: 51
