@@ -1,4 +1,4 @@
-# s3.zylowski.net/public/input/6.txt
+# https://s3.zylowski.net/public/input/6.txt
 
 """
 [Student A] Menu of application
@@ -29,7 +29,7 @@ def menu():
     print()
     category = input("Chose one of the options:\n"
                      "X: File location. \n"
-                     "A: Download text file from source.\n"
+                     "A: Load file.\n"
                      "B: Count letters in file.\n"
                      "C: Count words in file.\n"
                      "D: Count punctuation marks in file.\n"
@@ -62,18 +62,29 @@ def menu():
 
 
 def file_location():
-    file_location.locfile = input('Enter file destination: ')
+    file_location.locfile = "C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject"
     menu()
 
 
 def download_file():
     print('Downloading file to the directory...')
     # [Student B] Downloading text file from the internet
-    directo = file_location.locfile
-    url = 'https://s3.zylowski.net/public/input/6.txt'
-    wget.download(url, directo)
-    print('File downloaded to the directroy ' + directo)
-    menu()
+    sel_opt = input('Do you want to download file Y/N:')
+    if sel_opt == "Y" or sel_opt == "y":
+        print('to download file type https://s3.zylowski.net/public/input/6.txt')
+        directo = "C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject"
+        url = input('enter url to download file:')
+        wget.download(url, directo)
+        print('File downloaded to the directroy ' + directo)
+        menu()
+    elif sel_opt == "N" or sel_opt == "n":
+        path_to_file = input('Enter name of the file:')
+        if os.path.exists('6.txt') == False:
+            print('The file has not been downloaded, go back to the menu and select "a"')
+            return menu()
+    else:
+        print('Incorrect option selected, try again.')
+        download_file()
 
 
 def letter_count():
@@ -85,7 +96,7 @@ def letter_count():
 
     vowels = 0
     consonants = 0
-    file_to_load = open(file_location.locfile+'/6.txt', 'r')
+    file_to_load = open('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r')
     read_file = file_to_load.read()
     read_file.lower()
 
@@ -112,7 +123,7 @@ def words_count():
     if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile+'/6.txt', 'r')
+    file_to_load = open('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r')
     num_words = 0
     with file_to_load as f:
         for line in f:
@@ -132,7 +143,7 @@ def pun_marks_count():
     if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile+'/6.txt', 'r')
+    file_to_load = open('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r')
     read_file = file_to_load.read()
     my_list = []
     for c in read_file:
@@ -152,13 +163,17 @@ def sentence_count():
     if os.path.exists('6.txt') == False:
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
-    file_to_load = open(file_location.locfile+'/6.txt', 'r')
+    file_to_load = open('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r')
     read_file = file_to_load.read()
-    number_of_sentences = len(sent_tokenize(read_file))
+    my_list2 = []
+    for sentence_count in read_file:
+        if sentence_count == "?" or sentence_count == ".":
+            my_list2.append(sentence_count)
+    num_senten = len(my_list2)
     raport = open("raport.txt", "a+")
-    raport.write('Number of sentences: '+str(number_of_sentences)+'\n')
+    raport.write('Number of sentences: '+str(num_senten)+'\n')
     raport.close()
-    print('Number of sentences in file : ', number_of_sentences)
+    print('Number of sentences in file : ', num_senten)
     menu()
 
 
@@ -169,7 +184,7 @@ def report_generator():
         print('The file has not been downloaded, go back to the menu and select "a"')
         return menu()
     letter_Dictionary = dict()
-    file_to_load = open(file_location.locfile + '/6.txt', 'r')
+    file_to_load = open('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r')
     for line_in_file in file_to_load:
         this_must_be_lower = line_in_file.lower()
         letters = list(this_must_be_lower)
@@ -195,7 +210,7 @@ def save_report_to_file():
 def quit_program():
     print()
     # [Student B] Close the application
-    if os.path.exists(file_location.locfile+'/6.txt'):
+    if os.path.exists('C:/Users/jakub/Desktop/git na uczelnie na jutro/ImportProject/6.txt', 'r'):
         os.remove('6.txt')
         os.remove("raport.txt")
         quit()
